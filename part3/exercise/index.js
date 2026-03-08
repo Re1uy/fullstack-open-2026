@@ -50,7 +50,7 @@ app.get("/api/persons/:id", (request, response) => {
     })
 })
 
-app.delete("/api/persons/:id", (request, response) => {
+app.delete("/api/persons/:id", (request, response, next) => {
   Person.findByIdAndDelete(request.params.id)
     .then((result) => {
       response.status(204).end();
@@ -63,7 +63,7 @@ app.post("/api/persons", (request, response) => {
   const number = request.body.number;
   const person = new Person({
     name,
-    number,
+    number
   });
 
   if (!name || !number) {
@@ -75,6 +75,25 @@ app.post("/api/persons", (request, response) => {
   person.save().then(result => {
     response.json(result)
   })
+});
+
+app.put("/api/persons/:id", (request, response, next) => {
+  const body = request.body;
+
+  const person = {
+    name: body.name,
+    number: body.number,
+  };
+
+  Person.findByIdAndUpdate(request.params.id, person, { new: true })
+    .then((updatedPerson) => {
+      if (updatedPerson) {
+        response.json(updatedPerson);
+      } else {
+        response.status(404).end();
+      }
+    })
+    .catch((error) => next(error));
 });
 
 const PORT = process.env.PORT || 3001;
