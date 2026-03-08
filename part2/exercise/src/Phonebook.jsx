@@ -115,7 +115,7 @@ const App = () => {
           setnewPhone("");
           setNewName("");
         })
-        .catch((error) => {
+        .catch(() => {
           console.log('fail')
           notify(
             `Information of ${name} has already been removed from server`,
@@ -136,6 +136,9 @@ const App = () => {
         notify(`Added ${newName}`, "success");
         setnewPhone("");
         setNewName("");
+      })
+        .catch(error => {
+          notify(error.response.data.error, "error")
       });
     }
   };
