@@ -61,7 +61,10 @@ app.delete("/api/persons/:id", (request, response) => {
 app.post("/api/persons", (request, response) => {
   const name = request.body.name;
   const number = request.body.number;
-  const person = { name, number };
+  const person = new Person({
+    name,
+    number,
+  });
 
   if (!name || !number) {
     return response.status(400).json({
@@ -74,7 +77,7 @@ app.post("/api/persons", (request, response) => {
   })
 });
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
