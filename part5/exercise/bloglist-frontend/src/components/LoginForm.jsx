@@ -1,4 +1,4 @@
-const LoginForm = ({handleLogin, username, setUsername, password, setPassword}) => { 
+const LoginForm = ({ handleLogin, username, setUsername, password, setPassword }) => {
   return (
     <>
       <h2>Login</h2>
@@ -26,7 +26,7 @@ const LoginForm = ({handleLogin, username, setUsername, password, setPassword}) 
         <button type="submit">login</button>
       </form>
     </>
-  );
+  )
 }
 
-export default LoginForm;
+export default LoginForm
