@@ -75,7 +75,7 @@ const App = () => {
       author: blog.author,
       url: blog.url,
       likes: blog.likes + 1,
-      user: blog.user,
+      user: blog.user.id || blog.user
     }
 
     try {
